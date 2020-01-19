@@ -22,11 +22,13 @@ public:
     polynomial add(polynomial p1 , polynomial p2){
         vector<double> v1= p1.getConstants();
         vector<double> v2=p2.getConstants();
-
+        vector<double>& vx  = v2;
+        if (v1.size() > v2.size()){
+            vector<double>& vx = v1;
+        }
         vector<double> sum;
-        for(int i = 0; i < count; i++)
-        {
-            /* code */
+        for(int i = 0; i < vx.size() ; i++){
+            sum[i] = v1[i]+v2[i];
         }
         polynomial p3(sum);
 
