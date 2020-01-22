@@ -17,26 +17,36 @@ public:
     vector<double> getConstants()const {
         return constants;
     }
-    //Setters
-    
-    polynomial add(polynomial p1 , polynomial p2){
-        vector<double> v1= p1.getConstants();
-        vector<double> v2=p2.getConstants();
-        vector<double>& vx  = v2;
-        if (v1.size() > v2.size()){
-            vector<double>& vx = v1;
-        }
-        vector<double> sum;
-        for(int i = 0; i < vx.size() ; i++){
-            sum[i] = v1[i]+v2[i];
-        }
-        polynomial p3(sum);
-
-        return p3
-
-       
-       
+    //Setters - not working
+    void setConstants(vector<double> v){
+       // constants = v;
     }
+    void add(polynomial p){
+        vector<double> v1 = constants;
+        vector<double> v2 = p.getConstants();
+        
+        for (int i=0; i < v2.size();i++){
+            v1[i] += v2[i];
+        }
+        
+    }
+    polynomial sub( polynomial p){
+
+    }
+    polynomial mult(polynomial p){
+
+    }
+    polynomial display(){
+
+    }
+    polynomial evaluate(double x){
+
+    }
+    polynomial findRoots(){
+
+
+    }
+
 private:
     const vector<double> constants;
         
