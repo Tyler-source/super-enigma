@@ -20,13 +20,15 @@ class Expression {
             else return 0;
         }
         string inToPost(string& input){
+            cout << "Converting in to Post \n";
             stack<string> stk;                      //Create Stack
             stk.push("#");                          //Place Holder
             string postfix ="";                     //Create Output
 
             //Loop to continue until input string is empty,
             //everything will be on stack or in the output
-            while (!input.empty()){                
+            while (!input.empty()){
+                cout << "the string is not empty \n";                
                 int pos = input.find(" ");
                 string str = input.substr(0, pos);
 
@@ -59,6 +61,8 @@ class Expression {
                 postfix += stk.top();
                 stk.pop();
             }
+            //ERROR: POSTFIX SEEMS TO BE empty
+            //FOLLOW WORKFLOW TO ID Issue.
             return postfix;
         }
         string PostToIn();
