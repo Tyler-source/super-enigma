@@ -6,7 +6,7 @@ using namespace std;
 
 class Expression {
     public:
-        Expression(string input, int dir){
+        Expression(string& input, int dir){
             if (dir == 1)   
                 input = infix;
             else if (dir == 2)
@@ -76,7 +76,8 @@ int main(){
     cout << "Please Enter Expression seperated by spaces (Ex: \"x y + ( z ^ w ) \")";
     string input;
     cin >> input;
-
-    string postfix = Expression(input, 1);
+    Expression string = Expression(input , 1);
+    string.inToPost(input);
+    cout << input;
     return 0;
 }
