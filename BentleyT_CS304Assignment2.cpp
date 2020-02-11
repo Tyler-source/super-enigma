@@ -93,11 +93,13 @@ class Expression {
             } 
             //stack for variables
             stack<double> Dstk;
-            double i;
-            for(int i = 0 ;postfix.length()-1; i++) {
+            double z;
+            
+            for(int i = 0; i < postfix.length();i++){
                 //if its a number , push to stack 
                 if (isalnum(char(postfix[i]))){
-                    string str(1,postfix[i]);
+                    string str = postfix.substr(i,1);
+                    //cout << "substring "<<str;
                     double d = stod(str);
                     Dstk.push(d);
                 }
@@ -107,38 +109,37 @@ class Expression {
                     Dstk.pop();
                     double y = Dstk.top();
                     Dstk.pop();
+                    //switch statement to perform correct operation with correct operand , push result
                     switch(char(postfix[i])){
                         case '+': 
-                            i = x+y;
-                            Dstk.push(i);
+                            z = y+x;
+                            Dstk.push(z);
                             break;
                         case '-': 
-                            i = x-y;
-                            Dstk.push(i);
+                            z = y-x;
+                            Dstk.push(z);
                             break;
                         case '*': 
-                            i = x*y;
-                            Dstk.push(i);
+                            z = y*x;
+                            Dstk.push(z);
                             break;
                         case '/': 
-                            if (y == 0)
+                            if (x == 0)     //Cannot divide by zero
                                 return -99;
-                            i = x/y;
-                            Dstk.push(i);
+                            z = y/x;
+                            Dstk.push(z);
                             break;
                         case '^': 
-                            i = pow(x,y);
-                            Dstk.push(i);
+                            z = pow(y,x);
+                            Dstk.push(z);
                             break;
+                        
                     }
                 }
             }
             //remaining value will be result of the expression
             return Dstk.top();
         }
-
-        
-
     private:
         string infix;
         string postfix;
@@ -158,7 +159,11 @@ int main(){
        result = expr.inToPost();
     else
         result = expr.PostToIn();
-    cout << result << "\n";
-    //cout << "Expression result is : " << expr.evaluate();
+    cout << result;
+    double val = expr.evaluate();
+    if (val == -99)
+        cout <<"\nResult is invalid";
+    else
+        cout << "\nExpression result is : " << val;
     return 0;
 }
