@@ -2,6 +2,11 @@
 
 using namespace std;
 
+struct node
+{
+    int data;
+    node* next;
+};
 class LinkedList{
 private:
 node* head ,* tail;
@@ -12,21 +17,26 @@ public:
     }
     //TODO
     void insertFirst(int d){
-        if( head == nullptr){
-            head-> data = d;
-        }
+        node* n = new node;
+        n->data = d;
+        n->next = head;
+        head = n;
+    }
+    void displayList(){
+        if(head == nullptr)
+            cout << "The list is empty\n";
         else{
-            
+            node* n = new node;
+            n = head;
+            while(n != nullptr){
+                cout << n->data << " , ";
+                n = n->next;
+            }
         }
     }
-    void displayList();
     void mergesort();
 };
-struct node
-{
-    int data;
-    node* next;
-};
+
 
 
 int main() {
@@ -40,6 +50,6 @@ int main() {
  theList.insertFirst(33);
  theList.insertFirst(99);
  theList.displayList();
- theList.mergesort();
+ //theList.mergesort();
  theList.displayList();
 } 
