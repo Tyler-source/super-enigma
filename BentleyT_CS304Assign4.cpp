@@ -43,26 +43,20 @@ class ExpressionTree{
         //and distributing into an expression tree depending what the character is
         node* createtree(string& expr){
             node* x;
-            //create root of empty tree, since expr is a prefix ,
-            // first char is always an operator.
-            if( root == nullptr){
-                x = newNode(expr.at(0));
-                root = x;
-                expr = expr.substr(1);
-                x->left = createtree(expr);
-                x->right = createtree(expr);
-                return x;
-                
-           }
+           
            //return an operand as leaf of a (sub)tree
            if (!isOperator(expr.at(0))){
                x= newNode(expr.at(0));
+               if( root == nullptr)
+                    root = x;
                expr = expr.substr(1);
                return x;
            }
            //return operator as a subtree , recursively to the left and right
            else{
                 x= newNode(expr.at(0));
+                if( root == nullptr)
+                    root = x;
                 expr = expr.substr(1);
                 x->left = createtree(expr);
                 x->right = createtree(expr);
@@ -77,21 +71,17 @@ class ExpressionTree{
                 preTraverse(n->right);
             }
         }
-        // infix-traversing the expression tree
+        // infix-traversing the expression tree, and adds appropriate brackets to the expression.
         void inTraverse(node* n){
             if (n){
-              
-                inTraverse(n->left);
-                /*
-                if (!isOperator(n->data))
+                if (n->left)
                     cout << "(";
-                */
+                inTraverse(n->left);
+                
                 cout << n->data;
                 inTraverse(n->right);
-                /*
-                if (!isOperator(n->data))
+                if (n->left)
                     cout << ")";
-                */
             }
         }
         // postfix-traversing the expression tree
